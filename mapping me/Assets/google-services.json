@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "214239884083",
+    "project_id": "mapping-me-426b4",
+    "storage_bucket": "mapping-me-426b4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214239884083:android:158929a927f3d2fd8e0446",
+        "android_client_info": {
+          "package_name": "com.rawan.mappingme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzuZ9B0IK3FPTUgyA0Vw2Zx4sOynEcFGE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
