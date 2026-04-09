@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class EditProfileUI : MonoBehaviour
 {
@@ -8,7 +7,7 @@ public class EditProfileUI : MonoBehaviour
 
     void Start()
     {
-        if (UserData.Instance != null)
+        if (UserData.Instance != null && nameInput != null)
         {
             nameInput.text = UserData.Instance.username;
         }
@@ -16,16 +15,10 @@ public class EditProfileUI : MonoBehaviour
 
     public void SaveProfile()
     {
-        if (UserData.Instance != null)
+        if (UserData.Instance != null && nameInput != null)
         {
             UserData.Instance.SetUsername(nameInput.text);
+            Debug.Log("New name: " + UserData.Instance.username);
         }
-
-        SceneManager.LoadScene("07_Profile");
-    }
-
-    public void GoBack()
-    {
-        SceneManager.LoadScene("07_Profile");
     }
 }
