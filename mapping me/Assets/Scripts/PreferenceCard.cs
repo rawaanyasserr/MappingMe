@@ -5,6 +5,7 @@ public class PreferenceCard : MonoBehaviour
 {
     public string preferenceTitle;
     public string category;
+    public string keywords;
     public Image sourceImage;
 
     public void OnCardClicked()

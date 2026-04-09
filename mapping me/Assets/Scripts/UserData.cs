@@ -36,7 +36,6 @@ public class UserData : MonoBehaviour
 
     public List<PreferenceData> savedPreferences = new List<PreferenceData>();
     public List<TimelineEntry> timelineEntries = new List<TimelineEntry>();
-
     public string username = "Rue";
 
     private void Awake()
@@ -52,6 +51,14 @@ public class UserData : MonoBehaviour
         }
     }
 
+    public void AddPreference(string title, string category, Sprite image)
+    {
+        savedPreferences.Add(new PreferenceData(title, category, image));
+        timelineEntries.Add(new TimelineEntry("Added " + title, category + " • " + DateTime.Now.ToString("MMM dd")));
+
+        Debug.Log("Saved preference: " + title + " | " + category);
+    }
+
     public void SetUsername(string firstName)
     {
         if (string.IsNullOrWhiteSpace(firstName))
@@ -65,23 +72,9 @@ public class UserData : MonoBehaviour
         Debug.Log("Username set to: " + username);
     }
 
-    public void AddPreference(string title, string category, Sprite image)
-    {
-        savedPreferences.Add(new PreferenceData(title, category, image));
-        timelineEntries.Add(
-            new TimelineEntry(
-                "Added " + title,
-                category + " • " + DateTime.Now.ToString("MMM dd")
-            )
-        );
-
-        Debug.Log("Saved preference: " + title + " | " + category);
-    }
-
     public void ClearPreferences()
     {
         savedPreferences.Clear();
         timelineEntries.Clear();
-        Debug.Log("Cleared saved preferences and timeline.");
     }
 }

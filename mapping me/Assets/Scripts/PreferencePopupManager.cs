@@ -32,16 +32,23 @@ public class PreferencePopupManager : MonoBehaviour
         currentCategory = category;
         currentSprite = image;
 
-        popupImage.sprite = image;
-        titleText.text = title;
-        categoryText.text = category;
+        if (popupImage != null)
+            popupImage.sprite = image;
 
-        popupPanel.SetActive(true);
+        if (titleText != null)
+            titleText.text = title;
+
+        if (categoryText != null)
+            categoryText.text = category;
+
+        if (popupPanel != null)
+            popupPanel.SetActive(true);
     }
 
     public void ClosePopup()
     {
-        popupPanel.SetActive(false);
+        if (popupPanel != null)
+            popupPanel.SetActive(false);
     }
 
     public void SaveCurrentPreference()
@@ -52,15 +59,10 @@ public class PreferencePopupManager : MonoBehaviour
             return;
         }
 
-        if (currentSprite == null)
-        {
-            Debug.LogError("No selected preference to save.");
-            return;
-        }
-
         UserData.Instance.AddPreference(currentTitle, currentCategory, currentSprite);
         Debug.Log("Saved preference from popup: " + currentTitle);
 
-        popupPanel.SetActive(false);
+        if (popupPanel != null)
+            popupPanel.SetActive(false);
     }
 }

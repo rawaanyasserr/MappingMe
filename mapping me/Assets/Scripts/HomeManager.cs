@@ -51,9 +51,9 @@ public class HomeManager : MonoBehaviour
                     homeCard.cardImage.sprite = pref.image;
             }
 
-            TMP_Text titleText = newCard.GetComponentInChildren<TMP_Text>();
-            if (titleText != null)
-                titleText.text = pref.title;
+            TMP_Text text = newCard.GetComponentInChildren<TMP_Text>();
+            if (text != null)
+                text.text = pref.title;
         }
     }
 }

@@ -8,7 +8,7 @@ public class HomeCard : MonoBehaviour
 
     public void OnCardClicked()
     {
-        HomePopupManager popup = FindObjectOfType<HomePopupManager>();
+        HomePopupManager popup = FindFirstObjectByType<HomePopupManager>();
 
         if (popup != null)
         {

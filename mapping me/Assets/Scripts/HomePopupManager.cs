@@ -10,13 +10,19 @@ public class HomePopupManager : MonoBehaviour
 
     public void OpenPopup(Sprite image, string title)
     {
-        popupPanel.SetActive(true);
-        popupImage.sprite = image;
-        titleText.text = title;
+        if (popupPanel != null)
+            popupPanel.SetActive(true);
+
+        if (popupImage != null)
+            popupImage.sprite = image;
+
+        if (titleText != null)
+            titleText.text = title;
     }
 
     public void ClosePopup()
     {
-        popupPanel.SetActive(false);
+        if (popupPanel != null)
+            popupPanel.SetActive(false);
     }
 }
