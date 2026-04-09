@@ -3337,8 +3337,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 705218536}
   m_HandleRect: {fileID: 705218535}
   m_Direction: 2
-  m_Value: 1.0000023
-  m_Size: 0.57343197
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3694,7 +3694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ScrollRect
   m_Content: {fileID: 147065521}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1

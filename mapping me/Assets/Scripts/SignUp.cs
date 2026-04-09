@@ -13,57 +13,49 @@ public class SignUpUI : MonoBehaviour
 
     public void OnSignUpClicked()
     {
-        Debug.Log("SIGNUP CLICKED");
         string firstName = firstNameInput.text.Trim();
         string lastName = lastNameInput.text.Trim();
         string email = emailInput.text.Trim();
         string password = passwordInput.text;
         string confirmPassword = confirmPasswordInput.text;
 
-        if (string.IsNullOrEmpty(firstName))
-        {
-            SetStatus("Please enter your first name.");
-            return;
-        }
+        string message = ValidateInput(firstName, lastName, email, password, confirmPassword);
 
-        if (string.IsNullOrEmpty(lastName))
-        {
-            SetStatus("Please enter your last name.");
-            return;
-        }
-
-        if (string.IsNullOrEmpty(email))
-        {
-            SetStatus("Please enter your email.");
-            return;
-        }
-
-        if (string.IsNullOrEmpty(password))
-        {
-            SetStatus("Please enter your password.");
-            return;
-        }
-
-        if (password != confirmPassword)
-        {
-            SetStatus("Passwords do not match.");
-            return;
-        }
-
-        if (UserData.Instance != null)
-        {
-            UserData.Instance.SetUsername(firstName);
-        }
-
-        FirebaseAuthManager.Instance.SignUp(email, password, (success, message) =>
+        if (message != "")
         {
             SetStatus(message);
+            return;
+        }
+
+        if (FirebaseAuthManager.Instance == null)
+        {
+            SetStatus("Please start from the splash screen.");
+            return;
+        }
+
+        FirebaseAuthManager.Instance.SignUp(email, password, (success, resultMessage) =>
+        {
+            SetStatus(resultMessage);
 
             if (success)
             {
-                SceneManager.LoadScene("03_Home");
+                if (UserData.Instance != null)
+                    UserData.Instance.SetUsername(firstName);
+
+                SceneManager.LoadScene("Home");
             }
         });
+    }
+
+    string ValidateInput(string firstName, string lastName, string email, string password, string confirmPassword)
+    {
+        if (firstName == "") return "Please enter your first name.";
+        if (lastName == "") return "Please enter your last name.";
+        if (email == "") return "Please enter your email.";
+        if (password == "") return "Please enter your password.";
+        if (password != confirmPassword) return "Passwords do not match.";
+
+        return "";
     }
 
     void SetStatus(string message)

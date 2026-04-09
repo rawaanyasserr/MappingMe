@@ -91,6 +91,25 @@ public class FirebaseAuthManager : MonoBehaviour
         return "Invalid email or password.";
     }
 
+    string GetSignUpMessage(System.AggregateException exception)
+    {
+        if (exception == null)
+            return "Sign up failed.";
+
+        string error = exception.Flatten().Message.ToLower();
+
+        if (error.Contains("badly formatted"))
+            return "Please enter a valid email address.";
+
+        if (error.Contains("at least 6"))
+            return "Password must be at least 6 characters.";
+
+        if (error.Contains("already in use"))
+            return "This email is already registered.";
+
+        return "Sign up failed.";
+    }
+
     public void Logout()
     {
         if (auth != null)

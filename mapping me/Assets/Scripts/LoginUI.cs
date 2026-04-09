@@ -10,45 +10,45 @@ public class LoginUI : MonoBehaviour
 
     public void OnLoginClicked()
     {
-        Debug.Log("LOGIN CLICKED");
-
         string email = emailInput.text.Trim();
         string password = passwordInput.text;
 
-        if (string.IsNullOrEmpty(email))
-        {
-            SetStatus("Please enter your email.");
-            return;
-        }
+        string message = ValidateInput(email, password);
 
-        if (string.IsNullOrEmpty(password))
+        if (message != "")
         {
-            SetStatus("Please enter your password.");
+            SetStatus(message);
             return;
         }
 
         if (FirebaseAuthManager.Instance == null)
         {
-            SetStatus("Firebase manager not found. Start from Splash scene.");
-            Debug.LogError("FirebaseAuthManager.Instance is NULL");
+            SetStatus("Please start from the splash screen.");
             return;
         }
 
-        FirebaseAuthManager.Instance.Login(email, password, (success, message) =>
+        FirebaseAuthManager.Instance.Login(email, password, (success, resultMessage) =>
         {
-            SetStatus(message);
+            SetStatus(resultMessage);
 
             if (success)
             {
                 if (UserData.Instance != null)
                 {
-                    string emailName = email.Split('@')[0];
-                    UserData.Instance.SetUsername(emailName);
+                    string nameFromEmail = email.Split('@')[0];
+                    UserData.Instance.SetUsername(nameFromEmail);
                 }
 
                 SceneManager.LoadScene("03_Home");
             }
         });
+    }
+
+    string ValidateInput(string email, string password)
+    {
+        if (email == "") return "Please enter your email.";
+        if (password == "") return "Please enter your password.";
+        return "";
     }
 
     void SetStatus(string message)
