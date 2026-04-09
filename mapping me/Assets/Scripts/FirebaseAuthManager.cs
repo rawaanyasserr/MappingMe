@@ -8,9 +8,9 @@ public class FirebaseAuthManager : MonoBehaviour
     public static FirebaseAuthManager Instance;
 
     private FirebaseAuth auth;
-    public bool IsFirebaseReady { get; private set; } = false;
+    public bool IsFirebaseReady { get; private set; }
 
-    private void Awake()
+    void Awake()
     {
         if (Instance == null)
         {
@@ -20,17 +20,14 @@ public class FirebaseAuthManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            return;
         }
     }
 
-    private void Start()
+    void Start()
     {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
-            var status = task.Result;
-
-            if (status == DependencyStatus.Available)
+            if (task.Result == DependencyStatus.Available)
             {
                 auth = FirebaseAuth.DefaultInstance;
                 IsFirebaseReady = true;
@@ -38,7 +35,7 @@ public class FirebaseAuthManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Firebase dependency error: " + status);
+                Debug.LogError("Firebase dependency error: " + task.Result);
             }
         });
     }
@@ -47,25 +44,18 @@ public class FirebaseAuthManager : MonoBehaviour
     {
         if (!IsFirebaseReady)
         {
-            callback?.Invoke(false, "Firebase is not ready yet.");
+            callback(false, "Firebase is not ready yet.");
             return;
         }
 
         auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
             if (task.IsCanceled)
-            {
-                callback?.Invoke(false, "Sign up cancelled.");
-                return;
-            }
-
-            if (task.IsFaulted)
-            {
-                callback?.Invoke(false, task.Exception != null ? task.Exception.Flatten().Message : "Sign up failed.");
-                return;
-            }
-
-            callback?.Invoke(true, "Sign up successful.");
+                callback(false, "Sign up cancelled.");
+            else if (task.IsFaulted)
+                callback(false, CleanError(task.Exception));
+            else
+                callback(true, "Sign up successful.");
         });
     }
 
@@ -73,39 +63,37 @@ public class FirebaseAuthManager : MonoBehaviour
     {
         if (!IsFirebaseReady)
         {
-            callback?.Invoke(false, "Firebase is not ready yet.");
+            callback(false, "Firebase is not ready yet.");
             return;
         }
 
         auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
             if (task.IsCanceled)
-            {
-                callback?.Invoke(false, "Login cancelled.");
-                return;
-            }
-
-            if (task.IsFaulted)
-            {
-                callback?.Invoke(false, task.Exception != null ? task.Exception.Flatten().Message : "Login failed.");
-                return;
-            }
-
-            callback?.Invoke(true, "Login successful.");
+                callback(false, "Login cancelled.");
+            else if (task.IsFaulted)
+                callback(false, CleanError(task.Exception));
+            else
+                callback(true, "Login successful.");
         });
     }
 
-    public FirebaseUser GetCurrentUser()
+    string CleanError(System.AggregateException exception)
     {
-        return auth != null ? auth.CurrentUser : null;
+        if (exception == null)
+            return "Something went wrong.";
+
+        string error = exception.Flatten().Message.ToLower();
+        if (error.Contains("badly formatted"))
+            return "Please enter a valid email address.";
+        
+
+        return "Invalid email or password.";
     }
 
     public void Logout()
     {
         if (auth != null)
-        {
             auth.SignOut();
-            Debug.Log("User logged out.");
-        }
     }
 }

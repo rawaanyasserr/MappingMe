@@ -10,4 +10,6 @@ public class SceneNavigator : MonoBehaviour
     public void LoadMap() => SceneManager.LoadScene("05_Map");
     public void LoadTimeline() => SceneManager.LoadScene("06_Timeline");
     public void LoadProfile() => SceneManager.LoadScene("07_Profile");
+    public void LoadEditProfile() => SceneManager.LoadScene("08_EditProfile");
+
 }
