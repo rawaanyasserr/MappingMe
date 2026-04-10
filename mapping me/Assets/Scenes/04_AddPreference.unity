@@ -932,7 +932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ad77f8f3bfd465cb032c5e5f0f0cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PreferenceCard
-  preferenceTitle: Makeup
+  preferenceTitle: 'Winter '
   category: Aesthetic
   keywords: 
   sourceImage: {fileID: 279032386}
@@ -7111,8 +7111,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 329, y: -449.7}
-  m_SizeDelta: {x: 180.4865, y: 64.9891}
+  m_AnchoredPosition: {x: 287.72482, y: -449.7}
+  m_SizeDelta: {x: 263.0368, y: 64.9891}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2071436425
 GameObject:
