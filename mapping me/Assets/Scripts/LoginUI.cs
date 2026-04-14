@@ -13,49 +13,33 @@ public class LoginUI : MonoBehaviour
         string email = emailInput.text.Trim();
         string password = passwordInput.text;
 
-        string message = ValidateInput(email, password);
+        if (email == "")
+        {
+            SetStatus("Please enter your email.");
+            return;
+        }
 
-        if (message != "")
+        if (password == "")
+        {
+            SetStatus("Please enter your password.");
+            return;
+        }
+
+        FirebaseAuthManager.Instance.Login(email, password, (success, message) =>
         {
             SetStatus(message);
-            return;
-        }
-
-        if (FirebaseAuthManager.Instance == null)
-        {
-            SetStatus("Please start from the splash screen.");
-            return;
-        }
-
-        FirebaseAuthManager.Instance.Login(email, password, (success, resultMessage) =>
-        {
-            SetStatus(resultMessage);
 
             if (success)
             {
-                if (UserData.Instance != null)
-                {
-                    string nameFromEmail = email.Split('@')[0];
-                    UserData.Instance.SetUsername(nameFromEmail);
-                }
-
+                UserData.Instance.SetUsername(email.Split('@')[0]);
                 SceneManager.LoadScene("03_Home");
             }
         });
     }
 
-    string ValidateInput(string email, string password)
-    {
-        if (email == "") return "Please enter your email.";
-        if (password == "") return "Please enter your password.";
-        return "";
-    }
-
-    void SetStatus(string message)
+    void SetStatus(string msg)
     {
         if (statusText != null)
-            statusText.text = message;
-
-        Debug.Log(message);
+            statusText.text = msg;
     }
 }

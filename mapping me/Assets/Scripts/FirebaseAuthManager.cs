@@ -6,9 +6,9 @@ using Firebase.Extensions;
 public class FirebaseAuthManager : MonoBehaviour
 {
     public static FirebaseAuthManager Instance;
-
     private FirebaseAuth auth;
-    public bool IsFirebaseReady { get; private set; }
+
+    public bool IsReady { get; private set; }
 
     void Awake()
     {
@@ -17,10 +17,7 @@ public class FirebaseAuthManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        else Destroy(gameObject);
     }
 
     void Start()
@@ -30,44 +27,21 @@ public class FirebaseAuthManager : MonoBehaviour
             if (task.Result == DependencyStatus.Available)
             {
                 auth = FirebaseAuth.DefaultInstance;
-                IsFirebaseReady = true;
-                Debug.Log("Firebase Auth is ready.");
+                IsReady = true;
             }
-            else
-            {
-                Debug.LogError("Firebase dependency error: " + task.Result);
-            }
-        });
-    }
-
-    public void SignUp(string email, string password, System.Action<bool, string> callback)
-    {
-        if (!IsFirebaseReady)
-        {
-            callback(false, "Firebase is not ready yet.");
-            return;
-        }
-
-        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
-        {
-            if (task.IsCanceled)
-                callback(false, "Sign up cancelled.");
-            else if (task.IsFaulted)
-                callback(false, CleanError(task.Exception));
-            else
-                callback(true, "Sign up successful.");
         });
     }
 
     public void Login(string email, string password, System.Action<bool, string> callback)
     {
-        if (!IsFirebaseReady)
+        if (!IsReady)
         {
-            callback(false, "Firebase is not ready yet.");
+            callback(false, "System not ready.");
             return;
         }
 
-        auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
+        auth.SignInWithEmailAndPasswordAsync(email, password)
+        .ContinueWithOnMainThread(task =>
         {
             if (task.IsCanceled)
                 callback(false, "Login cancelled.");
@@ -78,36 +52,36 @@ public class FirebaseAuthManager : MonoBehaviour
         });
     }
 
-    string CleanError(System.AggregateException exception)
+    public void SignUp(string email, string password, System.Action<bool, string> callback)
     {
-        if (exception == null)
-            return "Something went wrong.";
+        if (!IsReady)
+        {
+            callback(false, "System not ready.");
+            return;
+        }
 
-        string error = exception.Flatten().Message.ToLower();
-        if (error.Contains("badly formatted"))
-            return "Please enter a valid email address.";
-        
-
-        return "Invalid email or password.";
+        auth.CreateUserWithEmailAndPasswordAsync(email, password)
+        .ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCanceled)
+                callback(false, "Sign up cancelled.");
+            else if (task.IsFaulted)
+                callback(false, CleanError(task.Exception));
+            else
+                callback(true, "Account created.");
+        });
     }
 
-    string GetSignUpMessage(System.AggregateException exception)
+    string CleanError(System.AggregateException e)
     {
-        if (exception == null)
-            return "Sign up failed.";
+        if (e == null) return "Something went wrong.";
 
-        string error = exception.Flatten().Message.ToLower();
+        string msg = e.Flatten().Message.ToLower();
 
-        if (error.Contains("badly formatted"))
-            return "Please enter a valid email address.";
+        if (msg.Contains("badly formatted"))
+            return "Invalid email format.";
 
-        if (error.Contains("at least 6"))
-            return "Password must be at least 6 characters.";
-
-        if (error.Contains("already in use"))
-            return "This email is already registered.";
-
-        return "Sign up failed.";
+        return "Invalid email or password.";
     }
 
     public void Logout()

@@ -4,25 +4,31 @@ using TMPro;
 
 public class HomePopupManager : MonoBehaviour
 {
+    public static HomePopupManager Instance;
+
     public GameObject popupPanel;
     public Image popupImage;
     public TMP_Text titleText;
 
-    public void OpenPopup(Sprite image, string title)
+    void Awake()
     {
-        if (popupPanel != null)
-            popupPanel.SetActive(true);
-
-        if (popupImage != null)
-            popupImage.sprite = image;
-
-        if (titleText != null)
-            titleText.text = title;
+        Instance = this;
     }
 
+    void Start()
+    {
+        popupPanel.SetActive(false);
+    }
+
+    public void OpenPopup(Sprite image, string title)
+    {
+        popupImage.sprite = image;
+        titleText.text = title;
+        popupPanel.SetActive(true);
+    }
+ 
     public void ClosePopup()
     {
-        if (popupPanel != null)
-            popupPanel.SetActive(false);
+        popupPanel.SetActive(false);
     }
 }

@@ -8,15 +8,6 @@ public class HomeCard : MonoBehaviour
 
     public void OnCardClicked()
     {
-        HomePopupManager popup = FindFirstObjectByType<HomePopupManager>();
-
-        if (popup != null)
-        {
-            popup.OpenPopup(cardImage.sprite, title);
-        }
-        else
-        {
-            Debug.LogError("HomePopupManager not found.");
-        }
+        HomePopupManager.Instance.OpenPopup(cardImage.sprite, title);
     }
 }

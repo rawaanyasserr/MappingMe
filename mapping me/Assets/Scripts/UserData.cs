@@ -38,7 +38,7 @@ public class UserData : MonoBehaviour
     public List<TimelineEntry> timelineEntries = new List<TimelineEntry>();
     public string username = "Rue";
 
-    private void Awake()
+    void Awake()
     {
         if (Instance == null)
         {
@@ -54,22 +54,17 @@ public class UserData : MonoBehaviour
     public void AddPreference(string title, string category, Sprite image)
     {
         savedPreferences.Add(new PreferenceData(title, category, image));
-        timelineEntries.Add(new TimelineEntry("Added " + title, category + " • " + DateTime.Now.ToString("MMM dd")));
 
-        Debug.Log("Saved preference: " + title + " | " + category);
+        string date = DateTime.Now.ToString("MMM dd");
+        timelineEntries.Add(new TimelineEntry("Added " + title, category + " • " + date));
     }
 
-    public void SetUsername(string firstName)
+    public void SetUsername(string userName)
     {
-        if (string.IsNullOrWhiteSpace(firstName))
-        {
+        if (string.IsNullOrWhiteSpace(userName))
             username = "Rue";
-            return;
-        }
-
-        firstName = firstName.Trim();
-        username = char.ToUpper(firstName[0]) + firstName.Substring(1).ToLower();
-        Debug.Log("Username set to: " + username);
+        else
+            username = userName.Trim();
     }
 
     public void ClearPreferences()

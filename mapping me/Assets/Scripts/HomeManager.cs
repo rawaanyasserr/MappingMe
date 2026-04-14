@@ -14,46 +14,31 @@ public class HomeManager : MonoBehaviour
 
     void LoadSavedPreferences()
     {
-        if (UserData.Instance == null)
-        {
-            Debug.LogError("UserData.Instance is NULL.");
-            return;
-        }
-
+        // Clear old cards
         foreach (Transform child in contentParent)
-        {
             Destroy(child.gameObject);
-        }
 
         var prefs = UserData.Instance.savedPreferences;
 
-        if (prefs == null || prefs.Count == 0)
+        // Show empty state if no data
+        if (prefs.Count == 0)
         {
-            if (emptyStateText != null)
-                emptyStateText.gameObject.SetActive(true);
-
+            emptyStateText.gameObject.SetActive(true);
             return;
         }
 
-        if (emptyStateText != null)
-            emptyStateText.gameObject.SetActive(false);
+        emptyStateText.gameObject.SetActive(false);
 
-        foreach (PreferenceData pref in prefs)
+        // Create cards
+        foreach (var pref in prefs)
         {
             GameObject newCard = Instantiate(cardPrefab, contentParent);
 
-            HomeCard homeCard = newCard.GetComponent<HomeCard>();
-            if (homeCard != null)
-            {
-                homeCard.title = pref.title;
+            HomeCard card = newCard.GetComponent<HomeCard>();
+            card.title = pref.title;
+            card.cardImage.sprite = pref.image;
 
-                if (homeCard.cardImage != null)
-                    homeCard.cardImage.sprite = pref.image;
-            }
-
-            TMP_Text text = newCard.GetComponentInChildren<TMP_Text>();
-            if (text != null)
-                text.text = pref.title;
+            newCard.GetComponentInChildren<TMP_Text>().text = pref.title;
         }
     }
 }
