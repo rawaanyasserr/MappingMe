@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 3313860321895405966}
   - component: {fileID: 2417120277695772293}
   - component: {fileID: 5753721837234715098}
+  - component: {fileID: 3472639937769720461}
   m_Layer: 5
   m_Name: TimelineItem
   m_TagString: Untagged
@@ -322,6 +323,20 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &3472639937769720461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5578453605677401732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0301fccd3a2d40ed8145aa7a5e094a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimelineItemUI
+  actionText: {fileID: 1727473361195467902}
+  metaText: {fileID: 9075685887322261497}
 --- !u!1 &6128035230600547537
 GameObject:
   m_ObjectHideFlags: 0

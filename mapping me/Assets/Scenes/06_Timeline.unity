@@ -994,13 +994,57 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5578453605677401732, guid: c56894c07a0d14f44a74ecde066556de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 621543243}
   m_SourcePrefab: {fileID: 100100000, guid: c56894c07a0d14f44a74ecde066556de, type: 3}
 --- !u!224 &621543239 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3313860321895405966, guid: c56894c07a0d14f44a74ecde066556de, type: 3}
   m_PrefabInstance: {fileID: 621543238}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &621543240 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9075685887322261497, guid: c56894c07a0d14f44a74ecde066556de, type: 3}
+  m_PrefabInstance: {fileID: 621543238}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &621543241 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1727473361195467902, guid: c56894c07a0d14f44a74ecde066556de, type: 3}
+  m_PrefabInstance: {fileID: 621543238}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &621543242 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5578453605677401732, guid: c56894c07a0d14f44a74ecde066556de, type: 3}
+  m_PrefabInstance: {fileID: 621543238}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &621543243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621543242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0301fccd3a2d40ed8145aa7a5e094a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimelineItemUI
+  actionText: {fileID: 621543241}
+  metaText: {fileID: 621543240}
 --- !u!1 &643454094
 GameObject:
   m_ObjectHideFlags: 0
