@@ -2103,7 +2103,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SignUpUI
   firstNameInput: {fileID: 1934267230}
-  lastNameInput: {fileID: 2076617757}
   emailInput: {fileID: 1804018600}
   passwordInput: {fileID: 747211850}
   confirmPasswordInput: {fileID: 634131735}
@@ -3636,7 +3635,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535

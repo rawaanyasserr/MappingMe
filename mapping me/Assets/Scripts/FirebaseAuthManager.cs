@@ -83,7 +83,8 @@ public class FirebaseAuthManager : MonoBehaviour
 
         return "Invalid email or password.";
     }
-
+    
+    
     public void Logout()
     {
         if (auth != null)
