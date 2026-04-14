@@ -14,13 +14,13 @@ public class HomeManager : MonoBehaviour
 
     void LoadSavedPreferences()
     {
-        // Clear old cards
+        
         foreach (Transform child in contentParent)
             Destroy(child.gameObject);
 
         var prefs = UserData.Instance.savedPreferences;
 
-        // Show empty state if no data
+        
         if (prefs.Count == 0)
         {
             emptyStateText.gameObject.SetActive(true);
@@ -29,7 +29,7 @@ public class HomeManager : MonoBehaviour
 
         emptyStateText.gameObject.SetActive(false);
 
-        // Create cards
+        
         foreach (var pref in prefs)
         {
             GameObject newCard = Instantiate(cardPrefab, contentParent);
