@@ -7,18 +7,11 @@ public class EditProfileUI : MonoBehaviour
 
     void Start()
     {
-        if (UserData.Instance != null && nameInput != null)
-        {
-            nameInput.text = UserData.Instance.username;
-        }
+        nameInput.text = UserData.Instance.username;
     }
 
     public void SaveProfile()
     {
-        if (UserData.Instance != null && nameInput != null)
-        {
-            UserData.Instance.SetUsername(nameInput.text);
-            Debug.Log("New name: " + UserData.Instance.username);
-        }
+        UserData.Instance.SetUsername(nameInput.text);
     }
 }

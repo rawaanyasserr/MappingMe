@@ -9,15 +9,8 @@ public class ProfileUI : MonoBehaviour
 
     void Start()
     {
-        if (UserData.Instance != null)
-        {
-            nameText.text = UserData.Instance.username;
-        }
-
-        if (subtitleText != null)
-        {
-            subtitleText.text = "Soft clean aesthetic";
-        }
+        nameText.text = UserData.Instance.username;
+        subtitleText.text = "Soft clean aesthetic";
     }
 
     public void OpenEditProfile()
@@ -27,11 +20,8 @@ public class ProfileUI : MonoBehaviour
 
     public void Logout()
     {
-        if (UserData.Instance != null)
-        {
-            UserData.Instance.username = "Rue";
-            UserData.Instance.ClearPreferences();
-        }
+        UserData.Instance.username = "Rue";
+        UserData.Instance.ClearPreferences();
 
         SceneManager.LoadScene("01_Login");
     }

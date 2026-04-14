@@ -20,13 +20,7 @@ public class SplashTypewriter : MonoBehaviour
         foreach (char c in fullText)
         {
             titleText.text += c;
-
-            float timer = 0f;
-            while (timer < letterDelay)
-            {
-                timer += Time.unscaledDeltaTime;
-                yield return null;
-            }
+            yield return new WaitForSecondsRealtime(letterDelay);
         }
     }
 }
