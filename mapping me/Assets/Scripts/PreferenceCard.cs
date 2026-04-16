@@ -7,6 +7,7 @@ public class PreferenceCard : MonoBehaviour
     public string category;
     public string keywords;
     public Image sourceImage;
+    public string imageName;
 
     public void OnCardClicked()
     {
@@ -16,7 +17,8 @@ public class PreferenceCard : MonoBehaviour
         PreferencePopupManager.Instance.OpenPopup(
             preferenceTitle,
             category,
-            sourceImage.sprite
+            sourceImage.sprite,
+            imageName
         );
     }
 }

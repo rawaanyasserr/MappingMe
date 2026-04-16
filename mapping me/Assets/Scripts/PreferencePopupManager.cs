@@ -14,6 +14,7 @@ public class PreferencePopupManager : MonoBehaviour
     string currentTitle;
     string currentCategory;
     Sprite currentSprite;
+    string currentImageName;
 
     void Awake()
     {
@@ -25,11 +26,12 @@ public class PreferencePopupManager : MonoBehaviour
         popupPanel.SetActive(false);
     }
 
-    public void OpenPopup(string title, string category, Sprite image)
+    public void OpenPopup(string title, string category, Sprite image, string imageName)
     {
         currentTitle = title;
         currentCategory = category;
         currentSprite = image;
+        currentImageName = imageName;
 
         popupImage.sprite = image;
         titleText.text = title;
@@ -44,7 +46,7 @@ public class PreferencePopupManager : MonoBehaviour
 
     public void SaveCurrentPreference()
     {
-        UserData.Instance.AddPreference(currentTitle, currentCategory, currentSprite);
+        UserData.Instance.AddPreference(currentTitle, currentCategory, currentSprite, currentImageName);
         popupPanel.SetActive(false);
     }
 }

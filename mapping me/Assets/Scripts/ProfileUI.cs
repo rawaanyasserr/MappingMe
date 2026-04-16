@@ -20,9 +20,7 @@ public class ProfileUI : MonoBehaviour
 
     public void Logout()
     {
-        UserData.Instance.username = "Rue";
-        UserData.Instance.ClearPreferences();
-
+        FirebaseAuthManager.Instance.Logout();
         SceneManager.LoadScene("01_Login");
     }
 }

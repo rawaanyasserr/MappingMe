@@ -8,12 +8,14 @@ public class PreferenceData
     public string title;
     public string category;
     public Sprite image;
+    public string imageName;
 
-    public PreferenceData(string title, string category, Sprite image)
+    public PreferenceData(string title, string category, Sprite image, string imageName)
     {
         this.title = title;
         this.category = category;
         this.image = image;
+        this.imageName = image.name;
     }
 }
 
@@ -51,12 +53,13 @@ public class UserData : MonoBehaviour
         }
     }
 
-    public void AddPreference(string title, string category, Sprite image)
+    public void AddPreference(string title, string category, Sprite image, string imageName)
     {
-        savedPreferences.Add(new PreferenceData(title, category, image));
+        savedPreferences.Add(new PreferenceData(title, category, image,imageName));
 
         string date = DateTime.Now.ToString("MMM dd");
         timelineEntries.Add(new TimelineEntry("Added " + title, category + " • " + date));
+        SaveManager.Instance.SaveData();
     }
 
     public void SetUsername(string userName)
@@ -65,11 +68,14 @@ public class UserData : MonoBehaviour
             username = "Rue";
         else
             username = userName.Trim();
+        SaveManager.Instance.SaveData();
     }
 
     public void ClearPreferences()
     {
         savedPreferences.Clear();
         timelineEntries.Clear();
+        SaveManager.Instance.SaveData();
     }
+  
 }
