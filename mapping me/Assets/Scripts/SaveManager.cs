@@ -37,13 +37,14 @@ public class SaveManager : MonoBehaviour
             return;
         }
 
-        savePath = Path.Combine(Application.persistentDataPath, "saveData.json");
+        savePath = Path.Combine(Application.persistentDataPath, "saveData_v3.json");
         Debug.Log( "Save Data saved to: " + savePath);
     }
 
     void Start()
     {
         Debug.Log("Save Data started.");
+      
         LoadData();
     }
 
@@ -58,6 +59,7 @@ public class SaveManager : MonoBehaviour
            
 
         SaveData data = new SaveData();
+        
         data.username = UserData.Instance.username;
 
         foreach (var pref in UserData.Instance.savedPreferences)
@@ -90,8 +92,14 @@ public class SaveManager : MonoBehaviour
 
         foreach (var pref in data.preferences)
         {
+            string path = "Images/" + pref.imageName;
             Sprite sprite = Resources.Load<Sprite>("Images/" + pref.imageName);
-
+            Debug.Log("Trying to load" + path + (sprite != null));
+            if (sprite == null)
+            {
+                Debug.Log("Missing image: " + pref.imageName);
+                continue;
+            }
             UserData.Instance.savedPreferences.Add(
                 new PreferenceData(pref.title, pref.category, sprite, pref.imageName)
             );
@@ -99,4 +107,5 @@ public class SaveManager : MonoBehaviour
 
         Debug.Log("Data loaded.");
     }
+    
 }

@@ -15,7 +15,7 @@ public class PreferenceData
         this.title = title;
         this.category = category;
         this.image = image;
-        this.imageName = image.name;
+        this.imageName = imageName;
     }
 }
 
