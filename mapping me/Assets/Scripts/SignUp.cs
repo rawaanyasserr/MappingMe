@@ -49,6 +49,8 @@ public class SignUpUI : MonoBehaviour
             {
                 UserData.Instance.savedPreferences.Clear();
                 UserData.Instance.timelineEntries.Clear();
+                UserData.Instance.SetUsername(firstName);
+
                 FirebaseDataManager.Instance.SaveAll();
 
                 
