@@ -31,7 +31,6 @@ public class LoginUI : MonoBehaviour
 
             if (success)
             {
-                UserData.Instance.SetUsername(email.Split('@')[0]);
                 SceneManager.LoadScene("03_Home");
             }
         });

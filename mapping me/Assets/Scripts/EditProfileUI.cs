@@ -13,5 +13,6 @@ public class EditProfileUI : MonoBehaviour
     public void SaveProfile()
     {
         UserData.Instance.SetUsername(nameInput.text);
+        FirebaseDataManager.Instance.SaveAll();
     }
 }

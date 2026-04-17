@@ -9,6 +9,7 @@ public class HomeManager : MonoBehaviour
 
     void Start()
     {
+        FirebaseDataManager.Instance.LoadAll();
         LoadSavedPreferences();
     }
 

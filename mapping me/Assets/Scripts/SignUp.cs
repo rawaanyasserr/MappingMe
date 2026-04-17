@@ -47,7 +47,11 @@ public class SignUpUI : MonoBehaviour
 
             if (success)
             {
-                UserData.Instance.SetUsername(firstName);
+                UserData.Instance.savedPreferences.Clear();
+                UserData.Instance.timelineEntries.Clear();
+                FirebaseDataManager.Instance.SaveAll();
+
+                
                 SceneManager.LoadScene("03_Home");
             }
         });

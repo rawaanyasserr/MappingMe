@@ -60,6 +60,7 @@ public class UserData : MonoBehaviour
         string date = DateTime.Now.ToString("MMM dd");
         timelineEntries.Add(new TimelineEntry("Added " + title, category + " • " + date));
         SaveManager.Instance.SaveData();
+        FirebaseDataManager.Instance.SaveAll();
     }
 
     public void SetUsername(string userName)
