@@ -11,7 +11,17 @@ public class FirebaseDataManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+       
         db = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
@@ -27,6 +37,7 @@ public class FirebaseDataManager : MonoBehaviour
     public void LoadAll(Action onComplete = null)
     {
         UserData.Instance.timelineEntries.Clear();
+        
 
         var user = FirebaseAuth.DefaultInstance.CurrentUser;
         if (user == null)

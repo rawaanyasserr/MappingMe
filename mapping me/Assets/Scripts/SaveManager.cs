@@ -29,7 +29,6 @@ public class SaveManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            Debug.Log("Save Manager awake.");
         }
         else
         {
@@ -38,12 +37,10 @@ public class SaveManager : MonoBehaviour
         }
 
         savePath = Path.Combine(Application.persistentDataPath, "saveData_v3.json");
-        Debug.Log( "Save Data saved to: " + savePath);
     }
 
     void Start()
     {
-        Debug.Log("Save Data started.");
       
         LoadData();
     }
@@ -73,7 +70,6 @@ public class SaveManager : MonoBehaviour
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(savePath, json);
 
-        Debug.Log("Saved to: " + savePath);
     }
 
     public void LoadData()
@@ -95,7 +91,6 @@ public class SaveManager : MonoBehaviour
             Debug.Log("Trying to load" + path + (sprite != null));
             if (sprite == null)
             {
-                Debug.Log("Missing image: " + pref.imageName);
                 continue;
             }
             UserData.Instance.savedPreferences.Add(
@@ -103,7 +98,6 @@ public class SaveManager : MonoBehaviour
             );
         }
 
-        Debug.Log("Data loaded.");
     }
     
 }
