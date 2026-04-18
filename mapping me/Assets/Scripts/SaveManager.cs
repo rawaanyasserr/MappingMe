@@ -50,10 +50,8 @@ public class SaveManager : MonoBehaviour
 
     public void SaveData()
     {
-        Debug.Log("Save Data called.");
         if (UserData.Instance == null)
         {
-            Debug.Log("Save Data called without UserData.Instance");
             return;
         }
            

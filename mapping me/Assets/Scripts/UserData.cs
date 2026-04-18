@@ -38,7 +38,7 @@ public class UserData : MonoBehaviour
 
     public List<PreferenceData> savedPreferences = new List<PreferenceData>();
     public List<TimelineEntry> timelineEntries = new List<TimelineEntry>();
-    public string username = "Rue";
+    public string username = "user";
 
     void Awake()
     {
@@ -66,17 +66,12 @@ public class UserData : MonoBehaviour
     public void SetUsername(string userName)
     {
         if (string.IsNullOrWhiteSpace(userName))
-            username = "Rue";
+            username = "user";
         else
             username = userName.Trim();
         SaveManager.Instance.SaveData();
     }
 
-    public void ClearPreferences()
-    {
-        savedPreferences.Clear();
-        timelineEntries.Clear();
-        SaveManager.Instance.SaveData();
-    }
+    
   
 }
