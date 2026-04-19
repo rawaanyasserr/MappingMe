@@ -13,10 +13,7 @@ public class ProfileUI : MonoBehaviour
         subtitleText.text = "Soft clean aesthetic";
     }
 
-    public void OpenEditProfile()
-    {
-        SceneManager.LoadScene("07_Profile");
-    }
+    
 
     public void Logout()
     {
